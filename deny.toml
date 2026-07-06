@@ -1,0 +1,30 @@
+# cargo-deny configuration. Run in CI via `cargo deny check`.
+# Schema reference: https://embarkstudios.github.io/cargo-deny/
+
+[advisories]
+db-urls = ["https://github.com/RustSec/advisory-db"]
+# Different fields under [advisories] take different enums:
+#   yanked       : severity — "allow" | "warn" | "deny"
+#   unmaintained : SCOPE — "all" | "workspace" | "transitive" | "none"
+# (older releases collapsed both into "warn"/"deny"; modern cargo-deny
+# splits them.)
+yanked       = "deny"
+unmaintained = "all"
+
+[licenses]
+allow = [
+  "MIT", "Apache-2.0", "Apache-2.0 WITH LLVM-exception",
+  "BSD-2-Clause", "BSD-3-Clause", "ISC",
+  "Unicode-DFS-2016", "Unicode-3.0",
+  "Zlib",
+]
+confidence-threshold = 0.93
+
+[bans]
+multiple-versions = "warn"
+deny = []
+
+[sources]
+unknown-registry = "deny"
+unknown-git      = "deny"
+allow-registry   = ["https://github.com/rust-lang/crates.io-index"]

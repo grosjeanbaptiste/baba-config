@@ -1,0 +1,8 @@
+# Tighten the defaults to match docs/STANDARDS.md.
+# - 50 lines/fn cap (default is 100); split sub-helpers if you hit this.
+# - 15 cognitive complexity (default 25); pull conditions into named helpers.
+# - MSRV = current stable; bump in lockstep with rust-toolchain.toml if added.
+
+too-many-lines-threshold      = 50
+cognitive-complexity-threshold = 15
+type-complexity-threshold     = 250

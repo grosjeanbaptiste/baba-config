@@ -1,0 +1,8 @@
+# Pinned toolchain — every contributor and every CI job builds with the
+# exact same rustc. Prevents "works on my machine" from clippy/rustfmt
+# behaviour drift as stable rolls. Bump this file when we intentionally
+# adopt a newer stable (see docs/adr/ if it's a load-bearing bump).
+[toolchain]
+channel    = "1.96.0"
+components = ["rustfmt", "clippy"]
+profile    = "minimal"

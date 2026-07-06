@@ -1,0 +1,14 @@
+[package]
+name        = "baba-config"
+version     = "0.1.0"
+edition     = "2024"
+description = "Baba — shared, zero-dependency reader for the Prolog-fact config files (taxonomy.pl, variables.pl). Consumed by baba-cli and baba-actions."
+license     = "MIT OR Apache-2.0"
+publish     = false
+
+# Deliberately zero external crates. This is the one piece of Rust that both
+# the cli and the actions sub-repos compile against, so it must stay as light
+# and stock-toolchain-buildable as the code it serves. See
+# ../docs/adr/022-shared-config-crate.md for why this crate exists despite
+# ADR-003 (sub-repos over monorepo).
+[dependencies]
