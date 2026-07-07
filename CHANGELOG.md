@@ -6,6 +6,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 ### Added
+- **Promoted to a domain kernel (workspace ADR-023).** Beyond the flat-fact
+  reader, the crate now carries the rich, taxonomy-driven domain model both
+  runtime crates share: `domain/` holds pure value objects built from
+  `taxonomy.pl` — `Verb` (+ `needs_confirm`, fail-safe), `VerbClass`,
+  `Object` (+ `walk_kind`), `FileKind`, `FileType`, `TimeWindow`, and the
+  `Taxonomy` aggregate — plus the fact-parsing primitives, the `FactSource`
+  port, and `KernelError`. `io.rs` is the infrastructure adapter
+  (`FileFactSource`) that reads a `.pl` file and feeds the domain through the
+  port. Stays zero-dependency (own error type, no `anyhow`). The prior free
+  functions (`parse_pairs`/`parse_singles`/`resolve_data_file`/`strip_head`/
+  …/`BABA_DIR`) are preserved as re-exports, so consumers build unchanged.
+
 - Initial extraction (workspace ADR-022). The zero-dependency reader for
   Baba's Prolog-fact config files — `resolve_data_file`, `strip_head`,
   `split2` / `split3`, `unquote`, `parse_pairs`, `parse_singles`, and the
