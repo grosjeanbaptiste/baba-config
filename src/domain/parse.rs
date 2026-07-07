@@ -78,7 +78,10 @@ mod tests {
 
     #[test]
     fn strip_head_matches_and_rejects() {
-        assert_eq!(strip_head("filetype(rust, rs)", "filetype("), Some("rust, rs"));
+        assert_eq!(
+            strip_head("filetype(rust, rs)", "filetype("),
+            Some("rust, rs")
+        );
         assert_eq!(strip_head("other(x, y)", "filetype("), None);
     }
 

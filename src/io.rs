@@ -113,13 +113,19 @@ mod tests {
         );
         let src = FileFactSource::at(&p);
         assert_eq!(src.pairs("filetype("), vec![("rust".into(), "rs".into())]);
-        assert_eq!(src.singles("link_parser_flag("), vec!["-limit=1".to_string()]);
+        assert_eq!(
+            src.singles("link_parser_flag("),
+            vec!["-limit=1".to_string()]
+        );
     }
 
     #[test]
     fn parse_pairs_free_fn_matches_and_missing_is_empty() {
         let p = tmp_with("pairs", "filetype(python, py).\n");
-        assert_eq!(parse_pairs(&p, "filetype("), vec![("python".into(), "py".into())]);
+        assert_eq!(
+            parse_pairs(&p, "filetype("),
+            vec![("python".into(), "py".into())]
+        );
         let missing = std::env::temp_dir().join("baba-config-io-nope.pl");
         assert!(parse_pairs(&missing, "filetype(").is_empty());
         assert!(parse_singles(&missing, "x(").is_empty());

@@ -335,7 +335,11 @@ mod tests {
         assert_eq!(t.window_seconds("yesterday"), Some(86400));
         assert_eq!(t.time_window("yesterday").unwrap().seconds(), 86400);
         assert_eq!(t.window_seconds("bogus"), None, "non-numeric skipped");
-        assert_eq!(t.window_seconds("today"), None, "today is runtime, not data");
+        assert_eq!(
+            t.window_seconds("today"),
+            None,
+            "today is runtime, not data"
+        );
     }
 
     #[test]
