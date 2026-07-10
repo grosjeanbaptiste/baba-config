@@ -6,6 +6,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 ### Added
+- **`VerbClass::parse` / `FileKind::parse` are now public.** They are the
+  domain's single source of truth for valid `verb_class` / `walk_kind` values;
+  exposing them lets the `baba-verify` taxonomy-integrity check validate the
+  data file against the same parser the aggregate uses, not a duplicated list.
+  Pure, no behaviour change.
 - **Promoted to a domain kernel (workspace ADR-023).** Beyond the flat-fact
   reader, the crate now carries the rich, taxonomy-driven domain model both
   runtime crates share: `domain/` holds pure value objects built from

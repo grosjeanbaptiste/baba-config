@@ -21,7 +21,11 @@ pub enum FileKind {
 }
 
 impl FileKind {
-    fn parse(value: &str) -> Option<Self> {
+    /// Parse a `walk_kind/2` value; `None` for anything outside the known
+    /// set. Public so integrity checks validate against the same parser the
+    /// aggregate uses, rather than a duplicated list.
+    #[must_use]
+    pub fn parse(value: &str) -> Option<Self> {
         match value {
             "file" => Some(Self::File),
             "directory" | "dir" => Some(Self::Dir),
@@ -43,7 +47,11 @@ pub enum VerbClass {
 }
 
 impl VerbClass {
-    fn parse(value: &str) -> Option<Self> {
+    /// Parse a `verb_class/2` value; `None` for anything outside the known
+    /// set. Public so integrity checks validate against the same parser the
+    /// aggregate uses, rather than a duplicated list.
+    #[must_use]
+    pub fn parse(value: &str) -> Option<Self> {
         match value {
             "readonly" => Some(Self::Readonly),
             "destructive" => Some(Self::Destructive),
