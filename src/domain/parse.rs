@@ -47,6 +47,22 @@ pub fn pairs_from_text(text: &str, head: &str) -> Vec<(String, String)> {
     out
 }
 
+/// Collect every `head(a, b, c).` fact in `text` as an `(a, b, c)` triple, in
+/// order. The 3-arity mirror of [`pairs_from_text`] — used by the package
+/// registry (`pack(name, summary, basis).`).
+#[must_use]
+pub fn triples_from_text(text: &str, head: &str) -> Vec<(String, String, String)> {
+    let mut out = Vec::new();
+    for body in fact_bodies(text) {
+        if let Some(args) = strip_head(body, head)
+            && let Some(triple) = split3(args)
+        {
+            out.push(triple);
+        }
+    }
+    out
+}
+
 /// Collect every single-argument `head(<value>).` fact in `text`, unquoted, in
 /// order. The mirror of [`pairs_from_text`] for one-arity settings.
 #[must_use]
@@ -109,6 +125,23 @@ mod tests {
                 ("python".to_string(), "py".to_string())
             ]
         );
+    }
+
+    #[test]
+    fn triples_from_text_reads_three_arg_facts_in_order() {
+        let text = "% c\npack(brew, 'Homebrew', 'scan brew').\npack(git, 'Git', 'scan git').\nother(x, y).\n";
+        assert_eq!(
+            triples_from_text(text, "pack("),
+            vec![
+                (
+                    "brew".to_string(),
+                    "Homebrew".to_string(),
+                    "scan brew".to_string()
+                ),
+                ("git".to_string(), "Git".to_string(), "scan git".to_string()),
+            ]
+        );
+        assert!(triples_from_text(text, "missing(").is_empty());
     }
 
     #[test]
