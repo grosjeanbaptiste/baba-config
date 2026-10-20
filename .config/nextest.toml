@@ -1,0 +1,7 @@
+# `baba ci` runs the tests with this profile; the JUnit report is what
+# `dotfiles test-index record` stores as git notes (ADR-039).
+[profile.baba-ci]
+fail-fast = false
+
+[profile.baba-ci.junit]
+path = "junit.xml"
