@@ -9,15 +9,15 @@ use crate::domain::parse::{pairs_from_text, singles_from_text};
 use crate::domain::source::FactSource;
 
 /// The canonical Baba workspace directory name under `$HOME`. Mirrors
-/// `baba-install`'s `BABA_HOME_REL` and the two crates' `BABA_DIR` — one
-/// definition both share for the resolution tail (`~/Baba/corpus/data`).
-pub const BABA_DIR: &str = "Baba";
+/// `baba-install`'s `doctor::BABA_HOME_REL` and the two crates' `BABA_DIR` — one
+/// definition both share for the resolution tail (`~/Source/Baba/corpus/data`).
+pub const BABA_DIR: &str = "Source/Baba";
 
 /// Resolve a data file shipped under `corpus/data/` (`taxonomy.pl`,
 /// `variables.pl`), CWD-independent. Order: `$<explicit_env>` (a file path) →
 /// `$BABA_DATA_DIR/<name>` (injected by `baba-cli`) →
 /// `$XDG_CONFIG_HOME/baba/<name>` → `~/.config/baba/<name>` →
-/// `~/Baba/corpus/data/<name>`.
+/// `~/Source/Baba/corpus/data/<name>`.
 #[must_use]
 pub fn resolve_data_file(explicit_env: &str, name: &str) -> Option<PathBuf> {
     if let Some(p) = std::env::var_os(explicit_env) {
