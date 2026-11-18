@@ -5,10 +5,12 @@
 pub mod error;
 pub mod packs;
 pub mod parse;
+pub mod sandbox;
 pub mod source;
 pub mod taxonomy;
 
 pub use error::KernelError;
 pub use packs::{Pack, Registry};
+pub use sandbox::SandboxPolicy;
 pub use source::FactSource;
 pub use taxonomy::{FileKind, FileType, Object, Taxonomy, TimeWindow, Verb, VerbClass};

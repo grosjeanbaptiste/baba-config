@@ -25,8 +25,8 @@ pub mod io;
 // --- Domain surface -------------------------------------------------------
 pub use domain::parse::{split2, split3, strip_head, triples_from_text, unquote};
 pub use domain::{
-    FactSource, FileKind, FileType, KernelError, Object, Pack, Registry, Taxonomy, TimeWindow,
-    Verb, VerbClass,
+    FactSource, FileKind, FileType, KernelError, Object, Pack, Registry, SandboxPolicy, Taxonomy,
+    TimeWindow, Verb, VerbClass,
 };
 
 // --- Infrastructure surface ----------------------------------------------
